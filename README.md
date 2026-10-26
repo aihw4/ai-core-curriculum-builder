@@ -11,7 +11,7 @@ A web app that helps Yale SOM faculty (smart, but not AI experts) design an AI c
 You need Python 3.9 or newer.
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/aihw4/ai-core-curriculum-builder.git
 cd ai-core-curriculum-builder
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate

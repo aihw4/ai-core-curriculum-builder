@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOM AI Core Curriculum Builder</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo">AI</div>
+    <div>
+      <div class="brand-title">AI Core Curriculum Builder</div>
+      <div class="brand-sub">For Yale SOM faculty designing the MBA AI core course</div>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button data-tab="overview" class="active">Overview</button>
+    <button data-tab="m1">1 · Using AI</button>
+    <button data-tab="m2">2 · Safety &amp; Governance</button>
+    <button data-tab="m3">3 · Labor Markets</button>
+    <button data-tab="builder">Curriculum Builder</button>
+    <button data-tab="news">AI News</button>
+    <button data-tab="library">Library</button>
+    <button data-tab="costs">Agent Log &amp; Costs</button>
+  </nav>
+</header>
+
+<main>
+<!-- ============ OVERVIEW ============ -->
+<section id="overview" class="tab active">
+  <div class="hero">
+    <h1>Design an AI core course grounded in sources you can trust.</h1>
+    <p>This tool gives SOM faculty a briefing on each proposed module, a live feed of AI news from
+      reputable outlets, and AI agents that draft a session-by-session syllabus. <strong>Every
+      reading the AI suggests is checked against a hand-verified library or a live news feed before
+      you see it.</strong> The model cannot invent a source.</p>
+    {% if not has_key %}
+    <div class="notice warn">No <code>PORTKEY_API_KEY</code> found. The briefings, library and news feed work;
+      the Curriculum Builder needs a key (see README).</div>
+    {% endif %}
+  </div>
+  <div class="cards three">
+    {% for m in modules %}
+    <a class="card module-card" href="#" data-goto="m{{ m.number }}">
+      <div class="pill m{{ m.number }}">Module {{ m.number }}</div>
+      <h3>{{ m.title }}</h3>
+      <p>{{ m.goal }}</p>
+      <span class="more">Open briefing →</span>
+    </a>
+    {% endfor %}
+  </div>
+  <div class="cards three">
+    <div class="card flat"><h4>1 · Read the briefings</h4><p>Plain-English overviews of each module, key debates, discussion questions and class activities, with every claim tied to a reading.</p></div>
+    <div class="card flat"><h4>2 · Generate a draft syllabus</h4><p>Set the number of sessions and how to weight the modules. Three AI agents draft, fact-check and critique a syllabus.</p></div>
+    <div class="card flat"><h4>3 · Stay current</h4><p>The news tab pulls live stories from {{ feeds|length }} outlets and newsletters, tagged by module, so the course can be updated each term.</p></div>
+  </div>
+</section>
+
+<!-- ============ MODULES ============ -->
+{% for m in modules %}
+<section id="m{{ m.number }}" class="tab">
+  <div class="pill m{{ m.number }}">Module {{ m.number }}</div>
+  <h1>{{ m.title }}</h1>
+  <div class="grid-2">
+    <div class="card"><h4>Goal</h4><p class="linkify">{{ m.goal }}</p></div>
+    <div class="card"><h4>Why it matters for MBAs</h4><p class="linkify">{{ m.why }}</p></div>
+  </div>
+  <h2>Key topics</h2>
+  <div class="topics">
+    {% for t in m.topics %}
+    <div class="topic"><h4>{{ t.name }}</h4><p class="linkify">{{ t.detail }}</p></div>
+    {% endfor %}
+  </div>
+  {% if m.functions %}
+  <h2>Business functions to survey</h2>
+  <div class="chips">{% for f in m.functions %}<span class="chip">{{ f }}</span>{% endfor %}</div>
+  {% endif %}
+  <div class="grid-2">
+    <div class="card"><h4>Discussion questions</h4><ul>{% for q in m.questions %}<li>{{ q }}</li>{% endfor %}</ul></div>
+    <div class="card"><h4>Suggested class activities</h4><ul>{% for a in m.activities %}<li>{{ a }}</li>{% endfor %}</ul></div>
+  </div>
+  <h2>Core readings</h2>
+  <div class="readings">
+    {% for x in library if x.module == m.number %}
+    <div class="reading" id="read-{{ x.id }}">
+      <div class="rid">{{ x.id }}</div>
+      <div>
+        <a href="{{ x.url }}" target="_blank" rel="noopener">{{ x.title }}</a>
+        <div class="meta">{{ x.authors }} · {{ x.year }} · {{ x.type }}</div>
+        <p>{{ x.summary }}</p>
+        <p class="teach"><strong>Teaching use:</strong> {{ x.teach }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <h2>Latest news for this module</h2>
+  <div class="news-list module-news" data-module="{{ m.number }}"><p class="muted">Loading live news…</p></div>
+</section>
+{% endfor %}
+
+<!-- ============ BUILDER ============ -->
+<section id="builder" class="tab">
+  <h1>Curriculum Builder</h1>
+  <p class="lead">Tell the agents about your course. They will draft a syllabus, check every citation, and review the draft for balance.</p>
+  <div class="builder">
+    <form id="build-form" class="card">
+      <div class="row">
+        <label>Sessions <input type="number" name="sessions" value="12" min="3" max="28"></label>
+        <label>Minutes per session <input type="number" name="minutes" value="80" min="45" max="180"></label>
+      </div>
+      <fieldset>
+        <legend>Module weighting <span id="wsum" class="muted"></span></legend>
+        <label>1 · Using AI <input type="range" name="w1" min="0" max="100" value="40"><output>40%</output></label>
+        <label>2 · Safety &amp; governance <input type="range" name="w2" min="0" max="100" value="30"><output>30%</output></label>
+        <label>3 · Labor markets <input type="range" name="w3" min="0" max="100" value="30"><output>30%</output></label>
+      </fieldset>
+      <label>Student background
+        <input type="text" name="background" value="First-year MBAs; most use ChatGPT casually, no technical training">
+      </label>
+      <label>Recent news items per session
+        <select name="news_per_session"><option>0</option><option selected>1</option><option>2</option></select>
+      </label>
+      <label>Notes for the agents (optional)
+        <textarea name="notes" rows="3" placeholder="e.g. Include a guest speaker slot; one session on AI in healthcare; final project instead of an exam."></textarea>
+      </label>
+      <button type="submit" class="btn" id="build-btn" {% if not has_key %}disabled{% endif %}>Generate draft syllabus</button>
+      {% if not has_key %}<p class="muted small">Add a PORTKEY_API_KEY to enable.</p>{% endif %}
+      <p class="muted small">Model: {{ model }} · about 1–2 minutes per run</p>
+    </form>
+    <div id="build-out">
+      <div class="card empty">
+        <h4>How the agents work</h4>
+        <ol class="steps">
+          <li><strong>News Curator</strong> fetches live RSS stories and tags each to a module.</li>
+          <li><strong>Curriculum Designer</strong> drafts sessions, citing only IDs from the verified library and news.</li>
+          <li><strong>Citation Checker</strong> (code, not AI) deletes any citation that doesn't exist.</li>
+          <li><strong>Balance Reviewer</strong> flags one-sided framing, unsupported numbers and missing stakeholders.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="news" class="tab">
+  <h1>AI News</h1>
+  <p class="lead">Live headlines from reputable outlets and newsletters. Links go to the original article; some (The Economist, WSJ, FT) are paywalled. Module tags and teaching hooks are suggested by the News Curator agent.</p>
+  <div class="toolbar">
+    <select id="news-module"><option value="all">All modules</option><option value="1">Module 1</option><option value="2">Module 2</option><option value="3">Module 3</option></select>
+    <select id="news-group"><option value="all">All sources</option><option>Major outlets</option><option>Newsletters</option><option>Research &amp; safety orgs</option></select>
+    <input id="news-search" type="search" placeholder="Search headlines">
+    <button class="btn ghost" id="news-refresh">Refresh feeds</button>
+    <span id="news-meta" class="muted small"></span>
+  </div>
+  <div class="news-list" id="news-list"><p class="muted">Loading…</p></div>
+  <h2>Other trusted sources (no feed)</h2>
+  <div class="cards three">
+    {% for s in no_feed %}
+    <a class="card flat" href="{{ s.url }}" target="_blank" rel="noopener"><h4>{{ s.name }}</h4><p>{{ s.note }}</p></a>
+    {% endfor %}
+  </div>
+  <details class="feed-status"><summary>Feed status</summary><div id="feed-status"></div></details>
+</section>
+
+<!-- ============ LIBRARY ============ -->
+<section id="library" class="tab">
+  <h1>Verified Library</h1>
+  <p class="lead">{{ library|length }} hand-checked readings. These are the only long-form sources the agents may cite.</p>
+  <input id="lib-search" type="search" placeholder="Search title, author or topic">
+  <table class="lib">
+    <thead><tr><th>ID</th><th>Module</th><th>Reading</th><th>Type</th><th>Year</th></tr></thead>
+    <tbody>
+    {% for x in library %}
+    <tr><td>{{ x.id }}</td><td><span class="pill m{{ x.module }}">{{ x.module }}</span></td>
+      <td><a href="{{ x.url }}" target="_blank" rel="noopener">{{ x.title }}</a><div class="meta">{{ x.authors }}</div></td>
+      <td>{{ x.type }}</td><td>{{ x.year }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ COSTS ============ -->
+<section id="costs" class="tab">
+  <h1>Agent Log &amp; Costs</h1>
+  <p class="lead">Every model call is logged with token counts and estimated cost. Prices are set in <code>.env</code>.</p>
+  <div id="usage"></div>
+  <h2>Last run trace</h2>
+  <div id="last-trace" class="muted">Run the Curriculum Builder to see a step-by-step trace.</div>
+</section>
+</main>
+
+<footer>Built for MGT 409 · Sources are linked to their original publishers · AI-generated drafts should be reviewed by faculty before use.</footer>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

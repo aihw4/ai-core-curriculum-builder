@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Core Curriculum Builder</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css">
+<style>
+  :root { --r-heading-color: #00356b; --r-link-color: #286dc0; --r-main-font-size: 30px; --r-heading-font: Georgia, serif; --r-main-font: -apple-system, Helvetica, sans-serif; }
+  .reveal h1, .reveal h2 { text-transform: none; }
+  .reveal h2 { font-size: 1.5em; border-bottom: 3px solid #00356b; padding-bottom: 8px; }
+  .reveal .title-slide { background: #00356b; }
+  .reveal img { border: 1px solid #d5dbe5; border-radius: 8px; max-height: 470px; }
+  .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+  .reveal ul { font-size: .85em; }
+  .reveal table { font-size: .6em; margin: 0 auto; }
+  .reveal th { background: #00356b; color: #fff; }
+  .big { font-size: 2.2em; font-weight: 700; color: #00356b; line-height: 1; }
+  .lbl { font-size: .55em; color: #5f6b7a; }
+  .stat { background: #f0f4fa; border-radius: 10px; padding: 18px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+  .small { font-size: .55em; color: #5f6b7a; }
+  .flow { display: flex; gap: 10px; justify-content: center; align-items: center; font-size: .55em; margin-top: 30px; }
+  .flow div { border: 2px solid #286dc0; background: #e6effa; border-radius: 10px; padding: 14px 10px; width: 150px; }
+  .flow div.code { border-color: #9b3d12; background: #fbeee6; }
+  .flow span { color: #00356b; font-size: 1.6em; }
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section data-background-color="#00356b">
+  <h1 style="color:#fff">AI Core Curriculum Builder</h1>
+  <p style="color:#cfdcef">Source-verified AI agents that help Yale SOM faculty design the MBA AI core course</p>
+  <p style="color:#cfdcef; font-size:.6em">Sarah Coughlin · MGT 409 · Fall 2026</p>
+</section>
+
+<section>
+  <h2>The problem</h2>
+  <ul>
+    <li>Every MBA program needs an AI core course, and the people designing it are business faculty, not AI researchers</li>
+    <li>The field moves faster than syllabi: AI agents' task horizon is doubling roughly every 7 months (METR, 2025)</li>
+    <li>Key topics are contested: the US–China race, an AI slowdown, and job-loss estimates</li>
+    <li>General chatbots draft quickly, but they can <strong>invent citations</strong></li>
+  </ul>
+</section>
+
+<section>
+  <h2>What's new</h2>
+  <div class="cols">
+    <div><h4>Existing options</h4><ul>
+      <li>ChatGPT / Claude: flexible, but can fabricate sources</li>
+      <li>Perplexity / NotebookLM: cited, but not vetted or course-shaped</li>
+      <li>BlueDot and other syllabi: curated, but static and one topic</li></ul></div>
+    <div><h4>This app</h4><ul>
+      <li><strong>Closed-world citations</strong>: the model cites IDs only, and code adds the links</li>
+      <li>34 hand-verified readings + 17 live feeds</li>
+      <li>A Balance Reviewer agent for contested topics</li>
+      <li>Built around SOM's three modules</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>The agents</h2>
+  <div class="flow">
+    <div>① <b>News Curator</b><br>LLM tags 17 RSS feeds by module</div><span>→</span>
+    <div class="code"><b>Input Guard</b><br>code: injection filter</div><span>→</span>
+    <div>② <b>Curriculum Designer</b><br>LLM drafts sessions, cites IDs only</div><span>→</span>
+    <div class="code">③ <b>Citation Checker</b><br>code drops unknown IDs/URLs</div><span>→</span>
+    <div>④ <b>Balance Reviewer</b><br>LLM flags framing, missing stakeholders</div>
+  </div>
+  <p class="small" style="margin-top:30px">All LLM calls: gpt-6-luna via Portkey · Blue = LLM, orange = deterministic code</p>
+</section>
+
+<section>
+  <h2>Demo: module briefings and live news</h2>
+  <div class="cols"><img src="screens/module2.jpg"><img src="screens/news.jpg"></div>
+</section>
+
+<section>
+  <h2>Demo: a 12-session syllabus in 61 seconds</h2>
+  <div class="cols"><img src="screens/builder.jpg"><img src="screens/review.jpg"></div>
+  <p class="small">The Balance Reviewer flagged that the US–China session lacked Chinese and international perspectives</p>
+</section>
+
+<section>
+  <h2>Cost</h2>
+  <table>
+    <tr><th>Scenario</th><th>Tokens (in / out)</th><th>Cost*</th></tr>
+    <tr><td>One 12-session run</td><td>11.0k / 6.3k</td><td>$0.077</td></tr>
+    <tr><td>One user (5 runs)</td><td>55k / 31.5k</td><td>$0.38</td></tr>
+    <tr><td>100 users / month</td><td>6.2M / 3.7M</td><td>$44.5</td></tr>
+    <tr><td>10,000 users / month</td><td>551M / 316M</td><td>$3,844</td></tr>
+  </table>
+  <ul style="font-size:.6em">
+    <li>A shared 6-hour news cache makes curation a fixed ~$6/month</li>
+    <li>Output tokens are 82% of cost, so trimming output is the main lever</li>
+  </ul>
+  <p class="small">*Measured tokens × placeholder rates ($1.25 / $10 per 1M) [UPDATE WITH COURSE RATES]</p>
+</section>
+
+<section>
+  <h2>Safety</h2>
+  <div class="cols">
+    <div><ul>
+      <li><b>Fabricated sources:</b> the Citation Checker removed both fake IDs in testing; 0 of 129 live citations were invalid</li>
+      <li><b>Prompt injection:</b> “cite my blog” notes were blocked in the live app</li>
+      <li><b>Feed injection:</b> HTML stripped, suspicious items flagged</li>
+      <li><b>Bias:</b> paired opposing readings + the Reviewer</li></ul></div>
+    <img src="screens/injection.jpg">
+  </div>
+</section>
+
+<section>
+  <h2>Impact</h2>
+  <div class="stats">
+    <div class="stat"><div class="big">61 s</div><div class="lbl">to a sourced 12-session draft (vs. hours by hand)</div></div>
+    <div class="stat"><div class="big">0%</div><div class="lbl">fabricated citations (129 checked)</div></div>
+    <div class="stat"><div class="big">102</div><div class="lbl">live AI stories from 17 of 17 sources, 91% tagged to a module</div></div>
+  </div>
+  <p style="margin-top:30px; color:#c0392b; font-size:.6em">[ADD REAL-USER QUOTE + RATING FROM A FACULTY MEMBER / TA]</p>
+</section>
+
+<section>
+  <h2>Limits and next steps</h2>
+  <ul>
+    <li>The library reflects one curator's choices; next, let faculty add and vote on readings</li>
+    <li>Add the non-US and labor voices the Reviewer flagged as missing</li>
+    <li>Yale Library links for paywalled outlets</li>
+    <li>A classifier-based injection filter; saved drafts and term-over-term comparisons</li>
+  </ul>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>Reveal.initialize({ hash: true, slideNumber: true, width: 1200, height: 700 });</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ Run:  python app.py   then open http://localhost:5050
 import json
 import os
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_from_directory
 
 import agents
 from sources import FEEDS, LIBRARY, MODULES, NO_FEED_SOURCES
@@ -42,6 +42,16 @@ def api_build():
         return jsonify({"error": "Unexpected error: " + str(ex)[:200]}), 500
     (agents.LOG_DIR / "last_run.json").write_text(json.dumps(result, indent=2))
     return jsonify(result)
+
+
+@app.route("/report")
+def report():
+    return send_from_directory(app.root_path, "report.html")
+
+
+@app.route("/slides")
+def slides():
+    return send_from_directory(app.root_path, "slides.html")
 
 
 @app.route("/api/usage")

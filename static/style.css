@@ -126,3 +126,5 @@ th { background: #f0f4fa; color: var(--yale); font-size: 13px; }
 
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 20px; border-top: 1px solid var(--line); }
 @media print { .top, footer, form, .toolbar { display: none; } .tab { display: none !important; } #builder { display: block !important; } }
+.economy { background: #f1f8f4; border: 1px solid #cfe6d8; border-radius: 14px; padding: 4px 22px 22px; margin-top: 28px; }
+.topic.econ { border-left-color: var(--m3); }

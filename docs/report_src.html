@@ -41,35 +41,49 @@ Sarah Coughlin · MGT 409 Final Project · Fall 2026</div>
 </div>
 
 <h2>1. Motivation</h2>
-<p>Every business school now has to decide what MBA students should learn about AI. The faculty who
-design these courses are experts in strategy, finance, operations or economics. Most of them are not AI researchers. The field
-moves faster than syllabi do. The METR task-horizon study finds that the length of tasks AI agents can complete has been
-doubling roughly every seven months (METR, 2025). A reading list written in the summer can be out of date by the
-first class.</p>
-<p>Three problems make the job hard:</p>
+<h3>1.1 Why SOM needs this course</h3>
+<p>AI is already reshaping the global economy that today's MBA students will graduate into. AI firms are spending
+trillions of dollars on chips, data centres and energy, and the returns on that spending are deeply uncertain
+(<em>The Economist</em>, July 2026). Anthropic's IPO filing reports $16.3 billion of revenue in the first half of 2026 and
+plans for $807 billion of AI infrastructure spending (<em>The New York Times</em>, 26 October 2026). Effects on work have
+started too. Early-career workers in the most AI-exposed occupations have seen a 13% relative decline in employment
+(Brynjolfsson, Chandar &amp; Chen, 2025).</p>
+<p>Yale SOM graduates will feel these labor-market effects in their own careers. They will also help decide how AI is
+developed and deployed: as executives who choose how to adopt it, as investors who fund it, as policymakers and
+advisers who regulate it, and as citizens. Whether AI turns out well for humanity depends in part on the decisions
+people like them make.</p>
+<p>So if SOM puts an AI class in the core curriculum, faculty have a responsibility to make sure it prepares students
+to be well-informed, responsible citizens in an AI world. That is a bigger goal than building technical skills for
+our future jobs. AI's societal effects at scale include who gains and who loses, how power concentrates, and how the
+technology is governed. With stakes like these, the “and society” in SOM's mission, <em>educating leaders for business
+and society</em>, cannot be an afterthought. It should be central to the course. The three modules reflect this:</p>
+<ol>
+  <li><strong>Working with AI.</strong> A breadth-first survey of AI modalities and business use cases. Familiarity
+  with every modality matters more than skill with any one tool, because the tools change quickly.</li>
+  <li><strong>AI safety and governance.</strong> The US–China race, what a slowdown could look like and its pros and
+  cons, how independent evaluators could work, and which stakeholders a governance framework needs.</li>
+  <li><strong>AI, the labor market and the US economy.</strong> Current estimates of labor-market impacts by sector,
+  and the economic mechanisms behind AI firms' market power: investment, financing, valuations and who bears the risk.</li>
+</ol>
+
+<h3>1.2 Why faculty need a tool to build it</h3>
+<p>The faculty who would design this course are experts in strategy, finance, operations or economics. Most of them
+are not AI researchers. Three problems make the job hard:</p>
 <ul>
-  <li><strong>Finding trustworthy sources.</strong> Faculty must separate reputable research such as the
-  International AI Safety Report, NBER working papers and the Stanford AI Index from hype, and they must do it across
-  technical, policy and economic literatures.</li>
-  <li><strong>Covering contested topics fairly.</strong> On the US–China race, a possible AI slowdown and job-loss
-  estimates, credible sources disagree sharply. Labor estimates alone range from Acemoglu's roughly 0.7% TFP gain over a
-  decade (NBER w32487) to industry forecasts of large productivity gains (McKinsey, 2023). Early evidence is also mixed. One study finds a
-  13% relative employment decline for early-career workers in AI-exposed jobs (Brynjolfsson, Chandar &amp; Chen, 2025).
-  The Yale Budget Lab (2025) finds no discernible broad disruption so far.</li>
-  <li><strong>Distrust of general chatbots.</strong> Asking a general chatbot for a syllabus is fast, but it can invent
-  citations. A fabricated reference on a syllabus embarrasses the professor in front of the students.</li>
+  <li><strong>The field moves faster than syllabi.</strong> The length of tasks AI agents can complete has been
+  doubling roughly every seven months (METR, 2025). A reading list written in the summer can be out of date by the
+  first class.</li>
+  <li><strong>The key topics are contested.</strong> Credible sources disagree sharply on the US–China race, a
+  possible AI slowdown and AI's economic impact. Labor-market estimates alone range from Acemoglu's roughly 0.7% TFP
+  gain over a decade (NBER w32487) to industry forecasts of large productivity gains (McKinsey, 2023). The Yale Budget
+  Lab (2025) finds no discernible broad labor-market disruption so far. A course that shapes citizens has to present
+  these debates fairly.</li>
+  <li><strong>General chatbots can invent sources.</strong> Asking a chatbot for a syllabus is fast, but it can
+  fabricate citations. A fabricated reference on a syllabus embarrasses the professor in front of the students.</li>
 </ul>
-<p>This app gives faculty three things in one place: plain-English briefings on the three proposed modules, a live and
+<p>This app gives faculty three things in one place: plain-English briefings on the three modules, a live,
 module-tagged news feed from reputable outlets, and agents that draft a syllabus <em>in which every reading is
 guaranteed to exist</em>.</p>
-<p>The three modules follow the course design the app is meant to support:</p>
-<ol>
-  <li>A <strong>breadth-first survey of AI modalities and business use cases</strong>. Familiarity with every modality
-  matters more than skill with any one tool, because the tools change quickly.</li>
-  <li><strong>AI safety and governance</strong>: the US–China race, what a slowdown could look like and its pros and cons,
-  how independent evaluators could work, and which stakeholders a governance framework needs.</li>
-  <li><strong>Current estimates of labor-market impacts</strong> by sector.</li>
-</ol>
 
 <h2>2. What is new</h2>
 <table>
@@ -81,7 +95,7 @@ guaranteed to exist</em>.</p>
   <tr><td>Existing curricula (e.g. BlueDot Impact courses, other schools' syllabi)</td><td>Expert-curated readings</td><td>Static; not tailored to SOM's session count, emphasis or students; one topic at a time</td></tr>
 </table>
 <p><strong>The new twist</strong> is a <em>closed-world citation design</em>, built specifically for teaching a fast-moving,
-contested subject. The model never writes a URL. It may cite only opaque IDs, either from a 34-item
+contested subject. The model never writes a URL. It may cite only opaque IDs, either from a 46-item
 library verified by hand or from live RSS items fetched that day. Code, not the model, turns IDs into links and deletes
 anything that doesn't resolve. A separate reviewer agent then checks the draft for one-sided framing. The result
 combines a chatbot's flexibility with a curated reading list's trustworthiness, and it stays current because the news layer
@@ -96,7 +110,7 @@ Python orchestrator (<code>agents.run_pipeline</code>). All LLM calls use <stron
 <svg viewBox="0 0 720 270" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif" font-size="12">
   <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#00356b"/></marker></defs>
   <rect x="10" y="20" width="120" height="58" rx="8" fill="#eef2f7" stroke="#8a94a3"/>
-  <text x="70" y="44" text-anchor="middle" font-weight="bold">17 RSS feeds</text>
+  <text x="70" y="44" text-anchor="middle" font-weight="bold">20 RSS feeds</text>
   <text x="70" y="62" text-anchor="middle" font-size="10">Economist, WSJ, BBC,</text>
   <text x="70" y="74" text-anchor="middle" font-size="10">FT, Substacks…</text>
   <rect x="10" y="150" width="120" height="70" rx="8" fill="#eef2f7" stroke="#8a94a3"/>
@@ -119,7 +133,7 @@ Python orchestrator (<code>agents.run_pipeline</code>). All LLM calls use <stron
   <text x="415" y="155" text-anchor="middle" font-size="10">cites IDs only (L.., N..)</text>
   <rect x="340" y="200" width="150" height="56" rx="8" fill="#eef2f7" stroke="#8a94a3"/>
   <text x="415" y="222" text-anchor="middle" font-weight="bold">Verified library</text>
-  <text x="415" y="240" text-anchor="middle" font-size="10">34 hand-checked readings</text>
+  <text x="415" y="240" text-anchor="middle" font-size="10">46 hand-checked readings</text>
   <rect x="525" y="85" width="85" height="80" rx="8" fill="#fbeee6" stroke="#9b3d12" stroke-width="2"/>
   <text x="567" y="112" text-anchor="middle" font-weight="bold">③ Citation</text>
   <text x="567" y="126" text-anchor="middle" font-weight="bold">Checker</text>
@@ -148,7 +162,7 @@ Python orchestrator (<code>agents.run_pipeline</code>). All LLM calls use <stron
 
 <table>
   <tr><th>Agent</th><th>Role</th><th>Tools / inputs</th><th>Output</th></tr>
-  <tr><td>① News Curator</td><td>Keep the course current</td><td>RSS fetch tool (17 feeds), keyword filter for general outlets, HTML stripping, injection flagging</td><td>JSON: module tag (0–3) and a ≤25-word teaching hook per story</td></tr>
+  <tr><td>① News Curator</td><td>Keep the course current</td><td>RSS fetch tool (20 feeds), keyword filter for general outlets, HTML stripping, injection flagging</td><td>JSON: module tag (0–3) and a ≤25-word teaching hook per story</td></tr>
   <tr><td>② Curriculum Designer</td><td>Draft the syllabus</td><td>Faculty parameters, library summaries (IDs only), up to 30 tagged news items</td><td>JSON: title, goals, sessions (module, objectives, activity, reading IDs, questions), assessment</td></tr>
   <tr><td>③ Citation Checker</td><td>Guarantee no invented sources</td><td>Library index, current news index, URL regex</td><td>Verified title/URL per reading; list of removed IDs</td></tr>
   <tr><td>④ Balance Reviewer</td><td>Quality and fairness critique</td><td>Draft + library summaries + requested weighting</td><td>JSON: 1–5 score, issues with suggestions</td></tr>
@@ -180,13 +194,13 @@ faculty member would want to see.</p>
 <h2>4. Tokenomics</h2>
 <h3>4.1 Measured tokens per run</h3>
 <p>The counts below come from the Portkey usage field, logged in <code>logs/usage.jsonl</code> across the
-test runs made today (three Designer runs, three Reviewer runs and three Curator refreshes).</p>
+test runs made today (three Designer runs, three Reviewer runs and five Curator refreshes).</p>
 <table>
   <tr><th>Agent</th><th class="n">Avg input</th><th class="n">Avg output</th><th class="n">Avg latency</th><th>Frequency</th></tr>
   <tr><td>Curriculum Designer (12 sessions)</td><td class="n">4,116</td><td class="n">4,979</td><td class="n">43 s</td><td>per run</td></tr>
   <tr><td>Curriculum Designer (6 sessions)</td><td class="n">4,117</td><td class="n">2,921</td><td class="n">26 s</td><td>per run</td></tr>
   <tr><td>Balance Reviewer</td><td class="n">~6,000</td><td class="n">~1,300</td><td class="n">14 s</td><td>per run</td></tr>
-  <tr><td>News Curator (102 stories)</td><td class="n">6,092</td><td class="n">~4,350</td><td class="n">44 s</td><td>≤ 4× per day, shared by all users</td></tr>
+  <tr><td>News Curator (120 stories)</td><td class="n">7,241</td><td class="n">5,006</td><td class="n">36 s</td><td>≤ 4× per day, shared by all users</td></tr>
 </table>
 <p>A typical 12-session run uses about <strong>11,000 input + 6,300 output tokens</strong> (Designer + Reviewer),
 excluding the shared Curator.</p>
@@ -199,17 +213,17 @@ OFFICIAL gpt-6-luna RATES AND RECOMPUTE.]</span> Token counts are measured; doll
   <tr><th>Scenario</th><th>Assumption</th><th class="n">Tokens (in / out)</th><th class="n">Cost</th></tr>
   <tr><td>One 12-session run</td><td>Designer + Reviewer</td><td class="n">11.0k / 6.3k</td><td class="n">$0.077</td></tr>
   <tr><td>One faculty user</td><td>5 runs while iterating on a course</td><td class="n">55k / 31.5k</td><td class="n">$0.38</td></tr>
-  <tr><td>Shared news curation</td><td>4 refreshes/day × 30 days</td><td class="n">731k / 522k</td><td class="n">$6.13 / month</td></tr>
-  <tr><td><strong>100 users</strong></td><td>5 runs each + 1 month of news</td><td class="n">6.2M / 3.7M</td><td class="n">$44.5</td></tr>
-  <tr><td><strong>10,000 users</strong></td><td>5 runs each + 1 month of news</td><td class="n">551M / 316M</td><td class="n">$3,844</td></tr>
+  <tr><td>Shared news curation</td><td>4 refreshes/day × 30 days</td><td class="n">869k / 601k</td><td class="n">$7.09 / month</td></tr>
+  <tr><td><strong>100 users</strong></td><td>5 runs each + 1 month of news</td><td class="n">6.4M / 3.8M</td><td class="n">$45.5</td></tr>
+  <tr><td><strong>10,000 users</strong></td><td>5 runs each + 1 month of news</td><td class="n">551M / 316M</td><td class="n">$3,845</td></tr>
 </table>
 <p>Output tokens account for about <strong>82% of cost</strong> ($0.063 of $0.077), so the levers that matter act on
 output length.</p>
 
 <h3>4.3 Cost-cutting steps taken, and trade-offs</h3>
 <ul>
-  <li><strong>Shared 6-hour news cache.</strong> Curation costs about $0.05 per refresh no matter how many faculty use the
-  app. At 10,000 users this turns a per-user cost into a fixed $6/month. <em>Trade-off:</em> news can be up to 6 hours old,
+  <li><strong>Shared 6-hour news cache.</strong> Curation costs about $0.06 per refresh no matter how many faculty use the
+  app. At 10,000 users this turns a per-user cost into a fixed $7/month. <em>Trade-off:</em> news can be up to 6 hours old,
   which is fine for curriculum planning.</li>
   <li><strong>Summaries, not full texts.</strong> The designer sees a 1–2 sentence summary of each reading (about 4k input
   tokens total) rather than the papers. <em>Trade-off:</em> the designer can't quote specific findings beyond the summaries.
@@ -230,6 +244,7 @@ output length.</p>
   <tr><td>Prompt injection via news feeds</td><td>RSS text is untrusted third-party content</td><td>HTML stripped, text truncated to 300 chars, suspicious items flagged and excluded from the model; prompts tell the agent that items are DATA</td></tr>
   <tr><td>One-sided or politicized framing</td><td>US–China, slowdown and job-loss topics are contested</td><td><strong>Balance Reviewer</strong> agent; library deliberately pairs opposing views (e.g. <em>Situational Awareness</em> with <em>Superintelligence Strategy</em> and <em>AI as Normal Technology</em>)</td></tr>
   <tr><td>Overclaimed statistics</td><td>Students repeat numbers they see</td><td>Designer told not to state numbers absent from the summaries; Reviewer checks this</td></tr>
+  <tr><td>Misrepresenting paywalled articles</td><td>The Economist, NYT and WSJ pieces cannot be read by the app</td><td>Library summaries of paywalled pieces (L35–L46) use only the publisher's own RSS headline and standfirst; they are labelled “paywalled”</td></tr>
   <tr><td>Malicious links</td><td>Feeds could contain non-http links</td><td>Only <code>http(s)</code> links rendered; all output HTML-escaped in the UI</td></tr>
   <tr><td>Key leakage</td><td>Course key must not be committed</td><td><code>.env</code> git-ignored; <code>.env.example</code> has no values</td></tr>
 </table>
@@ -254,27 +269,26 @@ still contain errors. The UI labels the output as a draft for faculty review.</p
 <p><strong>Time saved.</strong> Producing a sourced, 12-session draft syllabus with objectives, activities, discussion questions
 and a fairness review took <strong>61 seconds</strong> end to end. A sourced reading list across three literatures normally takes
 a faculty member many hours of searching.</p>
-<p><strong>Source quality.</strong> All 34 library items were checked by hand. Every one of the 129 citations
+<p><strong>Source quality.</strong> All 46 library items were checked by hand. Every one of the 129 citations
 generated in testing resolved to a verified reading or a live article, so 0% were fabricated.</p>
-<p><strong>Currency.</strong> The feed delivered 102 AI stories from 17 of 17 sources on the test day. The Curator tagged
-91% of them to a module (57 governance, 20 business use, 16 labor).</p>
-<p><strong>Why it matters.</strong> The labor-market module is directly relevant to the students themselves: early-career workers in
-AI-exposed occupations saw a 13% relative employment decline (Brynjolfsson, Chandar &amp; Chen, 2025). A course that
-stays current helps SOM graduates make better career and management decisions.</p>
-<div class="todo"><strong>[TO ADD BEFORE SUBMITTING — real-user evidence]</strong> Have one SOM faculty member, TA or
-classmate use the app for 5 minutes. Record: (1) their role, (2) a 1–5 rating for “I would use this to plan a course,”
-(3) how long they estimate the draft would have taken them by hand, and (4) one quote. Replace this box with those
-results.</div>
+<p><strong>Currency.</strong> The feed delivered 120 unique AI stories from 20 of 20 sources on the test day. The Curator
+tagged 95% of them to a module (51 governance, 42 labor and economy, 21 business use). The New York Times' coverage of
+Anthropic's S-1 filing, published the same day, was already in the feed and tagged to Module 3. A static syllabus can't
+match that.</p>
+<p><strong>Why it matters.</strong> The course this tool supports is meant to prepare students for an economy that AI is
+already reshaping, and for their role in shaping AI itself. A course that stays current and presents contested
+debates fairly does that better than one that is a year out of date or built on sources nobody checked.</p>
 
 <h2>7. Limits and next steps</h2>
 <ul>
-  <li><strong>Library curation is manual.</strong> The 34 readings reflect one curator's judgment. <em>Next:</em> let faculty
+  <li><strong>Library curation is manual.</strong> The 46 readings reflect one curator's judgment. <em>Next:</em> let faculty
   add, remove or vote on readings, and add perspectives the Reviewer flagged as missing (Chinese and other non-US voices on
   AI policy, labor-union perspectives).</li>
-  <li><strong>Paywalls.</strong> Economist, WSJ and FT stories link to paywalled pages. <em>Next:</em> show Yale Library
-  access links.</li>
+  <li><strong>Paywalls.</strong> Economist, WSJ, FT and NYT stories link to paywalled pages, and the app can describe the
+  paywalled library items (L35–L46) only from their headline and standfirst. <em>Next:</em> show Yale Library access links,
+  and have faculty add short summaries after reading the full pieces.</li>
   <li><strong>Keyword filter.</strong> General-outlet feeds are filtered by AI keywords, so some stories are missed and some
-  off-topic ones get through (9% were tagged “not useful”).</li>
+  off-topic ones get through (5% were tagged “not useful”).</li>
   <li><strong>Pattern-based injection filter</strong> can be evaded. <em>Next:</em> add a cheap classifier call.</li>
   <li><strong>No accounts or saved drafts.</strong> Drafts can be downloaded as Markdown but are not stored.
   <em>Next:</em> saved versions and a side-by-side comparison when the library changes each term.</li>
@@ -285,10 +299,12 @@ results.</div>
 <p class="small">METR (2025) “Measuring AI Ability to Complete Long Tasks”; Acemoglu (2024) “The Simple Macroeconomics of AI,”
 NBER w32487; McKinsey Global Institute (2023) “The Economic Potential of Generative AI”; Brynjolfsson, Chandar &amp; Chen (2025)
 “Canaries in the Coal Mine?”, Stanford Digital Economy Lab; The Budget Lab at Yale (2025) “Evaluating the Impact of AI on the
-Labor Market: Current State of Affairs.” Full links in the app's Library tab and <code>sources.py</code>.</p>
+Labor Market: Current State of Affairs”; <em>The Economist</em> (28 July 2026) “AI revenues are growing fast, but not fast enough”;
+<em>The New York Times</em> (26 October 2026) “Anthropic S-1 Reveals Rapid Growth Ahead of Blockbuster IPO.” Full links in the app's Library tab and <code>sources.py</code>.</p>
 
-<h3>Appendix: Module briefing screen</h3>
+<h3>Appendix: Module briefing screens</h3>
 <figure><img src="screens/module2.jpg"><figcaption>Figure 6. Module 2 briefing. Reading IDs such as L14 link to the verified entry.</figcaption></figure>
-<figure><img src="screens/news.jpg"><figcaption>Figure 7. Live AI news, tagged by module with teaching hooks.</figcaption></figure>
+<figure><img src="screens/economy.jpg"><figcaption>Figure 7. Module 3’s “AI and the US economy” section: the mechanisms behind AI firms’ market power, each linked to a verified reading.</figcaption></figure>
+<figure><img src="screens/news.jpg"><figcaption>Figure 8. Live AI news, tagged by module with teaching hooks.</figcaption></figure>
 </body>
 </html>

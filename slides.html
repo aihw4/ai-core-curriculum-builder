@@ -54,7 +54,7 @@
       <li>BlueDot and other syllabi: curated, but static and one topic</li></ul></div>
     <div><h4>This app</h4><ul>
       <li><strong>Closed-world citations</strong>: the model cites IDs only, and code adds the links</li>
-      <li>34 hand-verified readings + 17 live feeds</li>
+      <li>46 hand-verified readings + 20 live feeds</li>
       <li>A Balance Reviewer agent for contested topics</li>
       <li>Built around SOM's three modules</li></ul></div>
   </div>
@@ -63,7 +63,7 @@
 <section>
   <h2>The agents</h2>
   <div class="flow">
-    <div>① <b>News Curator</b><br>LLM tags 17 RSS feeds by module</div><span>→</span>
+    <div>① <b>News Curator</b><br>LLM tags 20 RSS feeds by module</div><span>→</span>
     <div class="code"><b>Input Guard</b><br>code: injection filter</div><span>→</span>
     <div>② <b>Curriculum Designer</b><br>LLM drafts sessions, cites IDs only</div><span>→</span>
     <div class="code">③ <b>Citation Checker</b><br>code drops unknown IDs/URLs</div><span>→</span>
@@ -89,11 +89,11 @@
     <tr><th>Scenario</th><th>Tokens (in / out)</th><th>Cost*</th></tr>
     <tr><td>One 12-session run</td><td>11.0k / 6.3k</td><td>$0.077</td></tr>
     <tr><td>One user (5 runs)</td><td>55k / 31.5k</td><td>$0.38</td></tr>
-    <tr><td>100 users / month</td><td>6.2M / 3.7M</td><td>$44.5</td></tr>
-    <tr><td>10,000 users / month</td><td>551M / 316M</td><td>$3,844</td></tr>
+    <tr><td>100 users / month</td><td>6.4M / 3.8M</td><td>$45.5</td></tr>
+    <tr><td>10,000 users / month</td><td>551M / 316M</td><td>$3,845</td></tr>
   </table>
   <ul style="font-size:.6em">
-    <li>A shared 6-hour news cache makes curation a fixed ~$6/month</li>
+    <li>A shared 6-hour news cache makes curation a fixed ~$7/month</li>
     <li>Output tokens are 82% of cost, so trimming output is the main lever</li>
   </ul>
   <p class="small">*Measured tokens × placeholder rates ($1.25 / $10 per 1M) [UPDATE WITH COURSE RATES]</p>
@@ -116,9 +116,8 @@
   <div class="stats">
     <div class="stat"><div class="big">61 s</div><div class="lbl">to a sourced 12-session draft (vs. hours by hand)</div></div>
     <div class="stat"><div class="big">0%</div><div class="lbl">fabricated citations (129 checked)</div></div>
-    <div class="stat"><div class="big">102</div><div class="lbl">live AI stories from 17 of 17 sources, 91% tagged to a module</div></div>
+    <div class="stat"><div class="big">120</div><div class="lbl">live AI stories from 20 of 20 sources, 95% tagged to a module</div></div>
   </div>
-  <p style="margin-top:30px; color:#c0392b; font-size:.6em">[ADD REAL-USER QUOTE + RATING FROM A FACULTY MEMBER / TA]</p>
 </section>
 
 <section>

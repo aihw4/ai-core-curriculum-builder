@@ -19,7 +19,7 @@
     <button data-tab="overview" class="active">Overview</button>
     <button data-tab="m1">1 · Using AI</button>
     <button data-tab="m2">2 · Safety &amp; Governance</button>
-    <button data-tab="m3">3 · Labor Markets</button>
+    <button data-tab="m3">3 · Labor &amp; Economy</button>
     <button data-tab="builder">Curriculum Builder</button>
     <button data-tab="news">AI News</button>
     <button data-tab="library">Library</button>
@@ -73,6 +73,17 @@
     <div class="topic"><h4>{{ t.name }}</h4><p class="linkify">{{ t.detail }}</p></div>
     {% endfor %}
   </div>
+  {% if m.economy %}
+  <div class="economy">
+    <h2>{{ m.economy.heading }}</h2>
+    <p class="lead">{{ m.economy.intro }}</p>
+    <div class="topics">
+      {% for t in m.economy.topics %}
+      <div class="topic econ"><h4>{{ t.name }}</h4><p class="linkify">{{ t.detail }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
   {% if m.functions %}
   <h2>Business functions to survey</h2>
   <div class="chips">{% for f in m.functions %}<span class="chip">{{ f }}</span>{% endfor %}</div>
